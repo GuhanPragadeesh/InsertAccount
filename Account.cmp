@@ -1,0 +1,30 @@
+<aura:component controller="AccountInsertLightning_Ctr"  implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+    <aura:attribute name="varname" type="string" />
+    <aura:attribute name="filetype" type="List" default="['.png', '.jpg', '.jpeg']" />
+    <aura:attribute name="multiple" type="Boolean" default="true" />
+    <aura:attribute name="disabled" type="Boolean" default="true" />
+    <aura:attribute name="recordId" type="String" />
+    <div class="slds-box slds-theme_shade slds-theme_alert-texture">
+        <div class="slds-p-top_xx-large"></div>
+        <b>Welcome</b>
+        <lightning:input name="testcmp" value="{!v.varname}" label="Welcome Text" />
+        
+        <div class="slds-p-around_medium">
+            <lightning:recordEditForm objectApiName="Account" onsubmit="{!c.handleSubmit}">
+                <lightning:avatar variant="circle" src="/docs/component-library/app/images/examples/avatar2.jpg"  fallbackIconName="standard:person_account" alternativeText="Amy Weaver" class="slds-m-right_small"/>
+                <lightning:inputField fieldName="Name"/>
+                <lightning:inputField fieldName="Phone" />
+                <lightning:inputField fieldName="BillingAddress"/>
+                                   
+                <lightning:button type="submit" name="Submit" label="submit" title="Click to Insert" onclick="{!c.handleSubmit}" class="slds-m-top_medium"/>
+                 <lightning:fileUpload label="Attach receipt"
+                                          name="fileUploader"
+                                          multiple="true"
+                                          accept="{!v.filetype}"
+                                          recordId="{!v.recordId}"
+                                          onuploadfinished="{!c.handleUploadFinished}" />
+
+            </lightning:recordEditForm>
+        </div>   
+    </div>
+</aura:component>
